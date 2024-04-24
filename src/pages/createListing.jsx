@@ -134,13 +134,14 @@ export default function CreateListing() {
       const res = await fetch("https://real-estate-server-ezx7.onrender.com/api/listing/create", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
+        credentials: 'include', // Add this line to include credentials
         body: JSON.stringify({
-          ...formData,
-          userRef: currentUser._id,
+            ...formData,
+            userRef: currentUser._id,
         }),
-      });
+    });    
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
