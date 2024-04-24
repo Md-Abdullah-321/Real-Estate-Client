@@ -40,7 +40,7 @@ function SignIn() {
     }
 
     dispatch(signInStart());
-    const res = await fetch("/api/auth/signin", {
+    const res = await fetch("https://real-estate-server-ezx7.onrender.com/api/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

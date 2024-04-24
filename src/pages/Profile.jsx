@@ -76,7 +76,7 @@ function Profile() {
     try {
       dispatch(updateUserStart());
 
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ function Profile() {
     try {
       dispatch(deleteUserStart());
 
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
 
@@ -136,7 +136,7 @@ function Profile() {
     try {
       dispatch(signOutUserStart());
 
-      const res = await fetch(`/api/auth/signout`, {
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/auth/signout`, {
         method: "GET",
       });
 
@@ -166,7 +166,7 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
 
       const data = await res.json();
 
@@ -183,7 +183,7 @@ function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`, {
         method: "DELETE",
       });
 

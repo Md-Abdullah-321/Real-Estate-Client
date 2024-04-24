@@ -53,7 +53,7 @@ function Search() {
       setShowMore(false);
       const searchQuery = urlParams.toString();
 
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/listing/get?${searchQuery}`);
 
       const data = await res.json();
       if (data.length > 8) {
@@ -122,7 +122,7 @@ function Search() {
     urlParams.set("startIndex", startIndex);
     const searchQuery = urlParams.toString();
 
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/listing/get?${searchQuery}`);
     const data = await res.json();
 
     setListings([...listings, ...data]);
