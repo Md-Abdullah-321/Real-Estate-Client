@@ -162,14 +162,15 @@ function Profile() {
       }, 1000 * 3);
     }
   };
-
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
-
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
+        credentials: 'include'
+      });
+  
       const data = await res.json();
-
+  
       if (data.success === false) {
         setShowListingsError(true);
         return;
@@ -180,6 +181,7 @@ function Profile() {
       setShowListingsError(true);
     }
   };
+  
 
   const handleListingDelete = async (listingId) => {
     try {
