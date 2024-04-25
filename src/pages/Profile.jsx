@@ -113,30 +113,35 @@ function Profile() {
 
   const handleDeleteUser = async () => {
     try {
-      dispatch(deleteUserStart());
+        dispatch(deleteUserStart());
 
-      const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`,
-        {
-          method: "DELETE",
-          credentials: 'include',
+        const res = await fetch(
+            `https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`,
+            {
+                method: "DELETE",
+                credentials: 'include',
+            }
+        );
+
+        if (res.status === 401) {
+            throw new Error("Unauthorized: Access token not provided");
         }
-      );
 
-      const data = await res.json();
+        const data = await res.json();
 
-      console.log("Delete User: ",data);
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to delete user.");
-      }
+        console.log("Delete User: ", data);
+        if (!res.ok) {
+            throw new Error(data.message || "Failed to delete user.");
+        }
 
-      dispatch(deleteUserSuccess(data));
-      alert(data);
+        dispatch(deleteUserSuccess(data));
+        alert(data);
     } catch (error) {
-      console.log("Delete User: ",error);
-      dispatch(deleteUserFailure(error.message || "Failed to delete user."));
+        console.log("Delete User: ", error);
+        dispatch(deleteUserFailure(error.message || "Failed to delete user."));
     }
-  };
+};
+
 
   const handleUserSignOut = async () => {
     try {
