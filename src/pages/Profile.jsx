@@ -124,6 +124,7 @@ function Profile() {
 
       const data = await res.json();
 
+      console.log(data);
       if (!res.ok) {
         throw new Error(data.message || "Failed to delete user.");
       }
@@ -156,15 +157,8 @@ function Profile() {
 
   const handleShowListings = async () => {
     try {
-      const jwt = process.env.JWT_SECRET;
-      console.log(jwt);
-  
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${jwt}` 
-        }
+        credentials: "include"
       });
   
       if (!res.ok) {
