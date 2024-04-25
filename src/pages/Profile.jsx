@@ -79,10 +79,12 @@ function Profile() {
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+        credentials: 'include' // Adding credentials option
+    });
+    
 
       const data = await res.json();
 
@@ -116,6 +118,7 @@ function Profile() {
 
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        credentials: 'include'
       });
 
       const data = await res.json();
@@ -165,9 +168,7 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
-        credentials: 'include'
-      });
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
   
       const data = await res.json();
   
