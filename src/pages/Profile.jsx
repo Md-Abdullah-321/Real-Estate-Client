@@ -89,7 +89,7 @@ function Profile() {
       );
 
       const data = await res.json();
-      console.log(data);
+      console.log("Update User: ",data);
 
       if (!res.ok) {
         throw new Error(data.message || "Failed to update user.");
@@ -124,7 +124,7 @@ function Profile() {
 
       const data = await res.json();
 
-      console.log(data);
+      console.log("Delete User: ",data);
       if (!res.ok) {
         throw new Error(data.message || "Failed to delete user.");
       }
@@ -166,7 +166,7 @@ function Profile() {
       }
   
       const data = await res.json();
-      console.log(data);
+      console.log("Listing: ",data);
       setUserListings(data);
       setShowListingsError(false);
     } catch (error) {
