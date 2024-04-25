@@ -84,8 +84,8 @@ function Profile() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-          credentials: 'include', // Adding credentials option
-          mode: 'no-cors' // Adding no-cors mode
+          credentials: 'include', 
+          mode: 'no-cors' 
         }
       );
 
@@ -156,7 +156,6 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      console.log(currentUser._id);
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
       
       const data = await res.json();
@@ -177,7 +176,7 @@ function Profile() {
         `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`,
         {
           method: "DELETE",
-          mode: 'no-cors' // Adding no-cors mode
+          credentials: true,
         }
       );
 
