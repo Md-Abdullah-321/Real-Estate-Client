@@ -83,8 +83,10 @@ function Profile() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
-          userId: currentUser._id,
+          body: JSON.stringify({
+            data: formData,
+            userId: currentUser._id
+          }),
           credentials: 'include',
         }
       );
@@ -119,9 +121,14 @@ function Profile() {
         const res = await fetch(
             `https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`,
             {
-                method: "DELETE",
-                credentials: 'include',
-                userId: currentUser._id,
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId: currentUser._id
+              }),
+              credentials: 'include',
             }
         );
 
@@ -150,8 +157,15 @@ function Profile() {
       dispatch(signOutUserStart());
 
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`, {
-          userId: currentUser._id,
+        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`,  {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: currentUser._id
+          }),
+          credentials: 'include',
         });
 
       const data = await res.json();
@@ -168,9 +182,15 @@ function Profile() {
 
   const handleShowListings = async () => {
     try {
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
-        credentials: "include",
-        userId: currentUser._id,
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}` {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: currentUser._id
+        }),
+        credentials: 'include',
       });
   
       if (!res.ok) {
@@ -192,11 +212,15 @@ function Profile() {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`,
-        {
-          method: "DELETE",
-          credentials: true,
-          userId: currentUser._id,
+        `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}` {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: currentUser._id
+          }),
+          credentials: 'include',
         }
       );
 
