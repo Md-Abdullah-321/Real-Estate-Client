@@ -140,12 +140,7 @@ function Profile() {
       dispatch(signOutUserStart());
 
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`,
-        {
-          method: "GET",
-          mode: 'no-cors' // Adding no-cors mode
-        }
-      );
+        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`);
 
       const data = await res.json();
 
