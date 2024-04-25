@@ -84,12 +84,12 @@ function Profile() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-          credentials: 'include', 
-          mode: 'no-cors' 
+          credentials: 'include',
         }
       );
 
       const data = await res.json();
+      console.log(data);
 
       if (!res.ok) {
         throw new Error(data.message || "Failed to update user.");
