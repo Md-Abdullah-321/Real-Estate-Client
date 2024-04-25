@@ -76,25 +76,22 @@ function Profile() {
     try {
       dispatch(updateUserStart());
 
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/update/${currentUser._id}`, {
-        method: "POST",
-        headers: {
+      const res = await fetch(
+        `https://real-estate-server-ezx7.onrender.com/api/user/update/${currentUser._id}`,
+        {
+          method: "POST",
+          headers: {
             "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: 'include' // Adding credentials option
-    });
-    
+          },
+          body: JSON.stringify(formData),
+          credentials: 'include' // Adding credentials option
+        }
+      );
 
       const data = await res.json();
 
-      if (data.success === false) {
-        dispatch(updateUserFailure(data.message));
-
-        setTimeout(() => {
-          dispatch(updateUserFailure(""));
-        }, 5 * 1000);
-        return;
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to update user.");
       }
 
       dispatch(updateUserSuccess(data));
@@ -104,7 +101,7 @@ function Profile() {
         setUpdateSuccess(false);
       }, 3 * 1000);
     } catch (error) {
-      dispatch(updateUserFailure(error.message));
+      dispatch(updateUserFailure(error.message || "Failed to update user."));
 
       setTimeout(() => {
         dispatch(updateUserFailure(""));
@@ -116,22 +113,24 @@ function Profile() {
     try {
       dispatch(deleteUserStart());
 
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-        credentials: 'include'
-      });
+      const res = await fetch(
+        `https://real-estate-server-ezx7.onrender.com/api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+          credentials: 'include'
+        }
+      );
 
       const data = await res.json();
 
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to delete user.");
       }
 
       dispatch(deleteUserSuccess(data));
       alert(data);
     } catch (error) {
-      dispatch(deleteUserFailure(error.message));
+      dispatch(deleteUserFailure(error.message || "Failed to delete user."));
     }
   };
 
@@ -139,62 +138,56 @@ function Profile() {
     try {
       dispatch(signOutUserStart());
 
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/auth/signout`, {
-        method: "GET",
-      });
+      const res = await fetch(
+        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`,
+        {
+          method: "GET",
+        }
+      );
 
       const data = await res.json();
 
-      console.log(data);
-
-      if (data.success === false) {
-        dispatch(signOutUserFailure(data.message));
-
-        setTimeout(() => {
-          dispatch(signOutUserFailure(""));
-        }, 1000 * 3);
-        return;
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to sign out user.");
       }
 
       dispatch(signOutUserSuccess(data));
     } catch (error) {
-      dispatch(signOutUserFailure(error.message));
-
-      setTimeout(() => {
-        dispatch(signOutUserFailure(""));
-      }, 1000 * 3);
+      dispatch(signOutUserFailure(error.message || "Failed to sign out user."));
     }
   };
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
-  
+      const res = await fetch(
+        `https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`
+      );
+
       const data = await res.json();
-  
-      if (data.success === false) {
-        setShowListingsError(true);
-        return;
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to fetch user listings.");
       }
+
       setUserListings(data);
-      console.log(userListings);
     } catch (error) {
       setShowListingsError(true);
     }
   };
-  
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       const data = res.json();
 
-      if (data.success === false) {
-        console.log(data.message);
-        return;
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to delete listing.");
       }
 
       setUserListings((prev) =>
