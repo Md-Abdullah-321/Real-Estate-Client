@@ -119,7 +119,6 @@ function Profile() {
         {
           method: "DELETE",
           credentials: 'include',
-          mode: 'no-cors' // Adding no-cors mode
         }
       );
 
