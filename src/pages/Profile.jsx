@@ -157,11 +157,7 @@ function Profile() {
     try {
       setShowListingsError(false);
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`,
-        {
-          mode: 'no-cors' // Adding no-cors mode
-        }
-      );
+        `https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
 
       const data = await res.json();
 
