@@ -155,12 +155,14 @@ function Profile() {
   };
   const handleShowListings = async () => {
     try {
+      const jwt = process.env.JWT_SECRET;
+  
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+          'Authorization': `Bearer ${jwt}` 
+        }
       });
   
       if (!res.ok) {
@@ -175,6 +177,7 @@ function Profile() {
       console.error("Error fetching user listings:", error);
     }
   };
+  
   
   const handleListingDelete = async (listingId) => {
     try {
