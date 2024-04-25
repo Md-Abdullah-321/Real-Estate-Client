@@ -102,6 +102,7 @@ function Profile() {
         setUpdateSuccess(false);
       }, 3 * 1000);
     } catch (error) {
+      console.log("Update User: ",error);
       dispatch(updateUserFailure(error.message || "Failed to update user."));
 
       setTimeout(() => {
@@ -132,6 +133,7 @@ function Profile() {
       dispatch(deleteUserSuccess(data));
       alert(data);
     } catch (error) {
+      console.log("Delete User: ",error);
       dispatch(deleteUserFailure(error.message || "Failed to delete user."));
     }
   };
@@ -170,6 +172,7 @@ function Profile() {
       setUserListings(data);
       setShowListingsError(false);
     } catch (error) {
+      console.log("Listing: ", error);
       setShowListingsError(true);
       console.error("Error fetching user listings:", error);
     }
