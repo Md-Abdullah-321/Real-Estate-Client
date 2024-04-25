@@ -153,6 +153,7 @@ function Profile() {
       dispatch(signOutUserFailure(error.message || "Failed to sign out user."));
     }
   };
+
   const handleShowListings = async () => {
     try {
       const jwt = process.env.JWT_SECRET;
@@ -171,6 +172,7 @@ function Profile() {
       }
   
       const data = await res.json();
+      console.log(data);
       setUserListings(data);
       setShowListingsError(false);
     } catch (error) {
