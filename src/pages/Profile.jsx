@@ -156,7 +156,11 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
+        headers:{
+          accept: 'application/json'
+        }
+      });
       
       const data = await res.json();
       console.log(data);
