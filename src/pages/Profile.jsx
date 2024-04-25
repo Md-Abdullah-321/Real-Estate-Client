@@ -155,21 +155,27 @@ function Profile() {
   };
   const handleShowListings = async () => {
     try {
-      setShowListingsError(false);
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`);
-      
-      const data = await res.json();
-
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+  
       if (!res.ok) {
-        throw new Error(data.message || "Failed to fetch user listings.");
+        throw new Error("Failed to fetch user listings. Status: " + res.status);
       }
-
+  
+      const data = await res.json();
       setUserListings(data);
+      setShowListingsError(false);
     } catch (error) {
       setShowListingsError(true);
+      console.error("Error fetching user listings:", error);
     }
   };
-
+  
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
