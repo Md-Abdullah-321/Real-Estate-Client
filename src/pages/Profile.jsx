@@ -156,6 +156,7 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       const jwt = process.env.JWT_SECRET;
+      console.log(jwt);
   
       const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
         method: 'GET',
