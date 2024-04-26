@@ -187,7 +187,7 @@ function Profile() {
   
       const data = await res.json();
       console.log("Listing: ",data);
-      setUserListings(data);
+      setUserListings(data.payload);
       setShowListingsError(false);
     } catch (error) {
       console.log("Listing: ", error);
