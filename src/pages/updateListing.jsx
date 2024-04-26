@@ -27,6 +27,7 @@ export default function UpdateListing() {
     offer: false,
     parking: false,
     furnished: false,
+    userId: currentUser._id
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
