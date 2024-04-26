@@ -170,7 +170,7 @@ function Profile() {
 
   const handleShowListings = async () => {
     try {
-      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}` {
+      const res = await fetch(`https://real-estate-server-ezx7.onrender.com/api/user/listings/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -200,7 +200,7 @@ function Profile() {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}` {
+        `https://real-estate-server-ezx7.onrender.com/api/listing/delete/${listingId}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
