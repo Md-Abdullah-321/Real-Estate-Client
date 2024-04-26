@@ -83,10 +83,7 @@ function Profile() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            data: formData,
-            userId: currentUser._id
-          }),
+          body: JSON.stringify({...formData, userId: currentUser._id}),
           credentials: 'include',
         }
       );
