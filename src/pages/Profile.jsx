@@ -157,16 +157,7 @@ function Profile() {
       dispatch(signOutUserStart());
 
       const res = await fetch(
-        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`,  {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: currentUser._id
-          }),
-          credentials: 'include',
-        });
+        `https://real-estate-server-ezx7.onrender.com/api/auth/signout`);
 
       const data = await res.json();
 
